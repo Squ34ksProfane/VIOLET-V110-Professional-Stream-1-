@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>VIOLET Overlay</title>
+  <style>
+    body { margin:0; background:transparent; color: white; font-family: Arial; }
+    #alerts { position: absolute; top: 10px; left: 10px; width: 60%; }
+    .alert { margin-bottom: 8px; background: rgba(0,0,0,0.6); padding: 8px 12px; border-radius: 8px; }
+  </style>
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+  <div id="alerts"></div>
+  <script>
+    const socket = io();
+    socket.on("connect", () => console.log("overlay connected"));
+    socket.on("alert", (data) => {
+      const div = document.createElement("div");
+      div.className = "alert";
+      // Render more nicely in real overlay
+      div.innerHTML = `<strong>${data.type || 'event'}</strong>: ${data.message || JSON.stringify(data)}`;
+      const container = document.getElementById("alerts");
+      container.prepend(div);
+      setTimeout(() => div.remove(), 8000);
+    });
+  </script>
+</body>
+</html>
