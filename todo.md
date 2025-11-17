@@ -21,5 +21,5 @@
 - [x] Create startup script
 
 ## 5. Push to GitHub
-- [ ] Commit all changes
-- [ ] Push to repository
+- [x] Commit all changes
+- [x] Push to repository
